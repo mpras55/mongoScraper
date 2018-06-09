@@ -60,10 +60,29 @@ $(document).on("click", ".btn-info", function () {
 });
 
 $(document).on("click", ".btn-success", function () {
-	// console.log($(this).data("headline"), $(this).data("url"));
+	loadSavedNews();
+});
+
+$(document).on("click", ".btn-danger", function () {
+	// console.log($(this).attr("id"));
+	$.ajax({
+		type: "DELETE",
+		url: "/deletenews",
+		dataType: "json",
+		data: {
+			id: $(this).attr("id")
+		}
+	})
+		.then(function (data) {
+			loadSavedNews();
+		}
+		);
+});
+
+function loadSavedNews() {
 	$("#news-area").empty();
 	$.getJSON("/savednews", function (data) {
-		console.log(data);
+		// console.log(data);
 		for (var index = 0; index < data.length; index++) {
 			var newDiv = $("<div>");
 
@@ -77,11 +96,11 @@ $(document).on("click", ".btn-success", function () {
 			var newButton = $("<button>");
 			newButton.html("Delete");
 			newButton.attr("class", "btn btn-danger btn-lg");
-			newButton.attr("id",data[index]._id);
+			newButton.attr("id", data[index]._id);
 			newDiv.append(newButton);
 
 			$("#news-area").append(newDiv);
 			$("#news-area").append("<br><br>");
 		}
 	});
-});
+}
