@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/style.css" type="text/css" />
+	<title>News</title>
+	<script src="https://code.jquery.com/jquery.js"></script>
+	<script src="/news.js"></script>
+</head>
+
+<body>
+	<div class="container">
+		<!-- Jumbotron -->
+		<div class="jumbotron text-center" style="background-color: #555555; color: #bbbbbb">
+			<!-- <img src="assets/images/platform934.jpg" alt="platform934"> -->
+			<h1>Today&#8217s Headlines</h1>
+			<h2>Scrape latest headlines for...</h2>
+			<div>
+				<button class="btn btn-primary btn-lg" id="national" type="submit">National</button>
+				<button class="btn btn-primary btn-lg" id="politics" type="submit">Politics</button>
+				<button class="btn btn-primary btn-lg" id="technology" type="submit">Technology</button>
+				<button class="btn btn-primary btn-lg" id="business" type="submit">Business</button>
+				<button class="btn btn-primary btn-lg" id="science" type="submit">Science</button>
+				<button class="btn btn-primary btn-lg" id="health" type="submit">Health</button>
+				<button class="btn btn-primary btn-lg" id="world" type="submit">World</button>
+			</div>
+			<div>
+				<br>
+				<h2>Click here to see all your saved news</h2>
+				<br>
+				<button class="btn btn-success btn-lg" id="saved-news" type="submit">Saved News</button>
+			</div>
+			<h1 id=curr-time></h1>
+		</div>
+		<div class="jumbotron text-left" id="news-area" style="background-color: #bbbbbb; color: #555555">
+		</div>
+	</div>
+</body>
+
+</html>
