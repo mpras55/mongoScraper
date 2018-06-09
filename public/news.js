@@ -1,6 +1,6 @@
 $(document).on("click", ".btn-primary", function () {
-	console.log("News button");
-	console.log(this.id);
+	// console.log("News button");
+	// console.log(this.id);
 	var newsCategory = this.id;
 	$.ajax({
 		type: "POST",
@@ -11,7 +11,7 @@ $(document).on("click", ".btn-primary", function () {
 		}
 	})
 		.then(function (data) {
-			console.log(data);
+			// console.log(data);
 			$("#news-area").empty();
 			for (let index = 0; index < data.length; index++) {
 				var newDiv = $("<div>");
@@ -35,17 +35,12 @@ $(document).on("click", ".btn-primary", function () {
 				$("#news-area").append(newDiv);
 				$("#news-area").append("<br><br>");
 			}
-			// getUnread();
-			// $("#author").val("");
-			// $("#title").val("");
 		}
 		);
-	// return false;
 });
 
 $(document).on("click", ".btn-info", function () {
-	console.log($(this).data("headline"), $(this).data("url"));
-
+	// console.log($(this).data("headline"), $(this).data("url"));
 	$.ajax({
 		type: "POST",
 		url: "/savenews",
@@ -58,8 +53,35 @@ $(document).on("click", ".btn-info", function () {
 	})
 		.then(function (data) {
 			console.log(data);
-			}
+		}
 		);
-		$(this).attr("class", "btn btn-warning btn-lg");
-		$(this).html("Saved");
+	$(this).attr("class", "btn btn-warning btn-lg");
+	$(this).html("Saved");
+});
+
+$(document).on("click", ".btn-success", function () {
+	// console.log($(this).data("headline"), $(this).data("url"));
+	$("#news-area").empty();
+	$.getJSON("/savednews", function (data) {
+		console.log(data);
+		for (var index = 0; index < data.length; index++) {
+			var newDiv = $("<div>");
+
+			var newPara = $("<a>")
+			newPara.html("<h3>" + data[index].headline + "</h3>");
+			newPara.attr("href", data[index].url);
+			newPara.attr("target", "_blank");
+			newDiv.append(newPara);
+			newDiv.append("<br>");
+
+			var newButton = $("<button>");
+			newButton.html("Delete");
+			newButton.attr("class", "btn btn-danger btn-lg");
+			newButton.attr("id",data[index]._id);
+			newDiv.append(newButton);
+
+			$("#news-area").append(newDiv);
+			$("#news-area").append("<br><br>");
+		}
+	});
 });

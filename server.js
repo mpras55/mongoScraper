@@ -90,15 +90,24 @@ app.post("/savenews", function (req, res) {
 	var news = new News(req.body);
 	console.log(news);
 	News.create(news)
-	.then(function (dbNews) {
-		// If saved successfully, send the the new User document to the client
-		res.json(true);
-	})
-	.catch(function (err) {
-		// If an error occurs, send the error to the client
-		res.json(err);
-	});
+		.then(function (dbNews) {
+			// If saved successfully, send the the new User document to the client
+			res.json(true);
+		})
+		.catch(function (err) {
+			// If an error occurs, send the error to the client
+			res.json(err);
+		});
 
 });
 
-
+app.get("/savednews", function (req, res) {
+	News.find( function (error, found) {
+		if (error) {
+			console.log(error);
+		}
+		else {
+			res.json(found);
+		}
+	});
+});
